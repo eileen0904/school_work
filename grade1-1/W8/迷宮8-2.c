@@ -11,17 +11,17 @@
 int main(){
     int n,i,j,k;
     scanf("%d",&n);
-    int maze[n][n];
+    int maze[400][400];
     for(i=0;i<n;i++){
         for(j=0;j<n;j++){
             scanf("%d",&maze[i][j]);
         }
     }
     maze[0][0]=2;
-    for(i=0;i<n*n;i++){
+    for(i=0;i<=n*n;i++){
         for(j=0;j<n;j++){
             for(k=0;k<n;k++){
-                if(maze[j][k]==0 && (maze[j-1][k]==2 || maze[j+1][k]==2 || maze[j][k-1]==2 || maze[j][k+1]==2) && j-1>=0 && k-1>=0){
+                if(maze[j][k]==0 && (maze[j-1][k]==2 || maze[j+1][k]==2 || maze[j][k-1]==2 || maze[j][k+1]==2)){
                     maze[j][k]=2;
                 }
             }
