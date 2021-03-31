@@ -40,23 +40,26 @@ public:
 
 class IntNumber
 {
-    int num;
+    int n;
 public:
     IntNumber(){
-        num = 0;
+        n = 0;
     }
 
     Digit digit[10000];
-    int k, m, op;
+    bool n1_big = false;
+    int k, op;
     IntNumber(char *c){
         string number(c);
-        int i, n=0, not_zero=0;
+        int i, not_zero=0;
         k=0;
         op=0;
-        m=0;
         for(i=0;i<number.length();i++){
             if(isalpha(number[i])){
                 break;
+            }
+          	if(number[0]=='+'){
+              	op=0;
             }
             if(number[0]=='-'){
                 op=1;
@@ -64,11 +67,7 @@ public:
             if(number[i]>'0' && number[i]<='9'){
                 not_zero=1;
             }
-            if(isdigit(number[i]) && not_zero==1 && op!=0){
-                digit[m].setDigit(number[i]-48);
-                m++;
-            }
-            if(isdigit(number[i]) && not_zero==1 && op==0){
+            if(isdigit(number[i]) && not_zero==1){
                 digit[k].setDigit(number[i]-48);
                 k++;
             }
@@ -76,13 +75,13 @@ public:
     }
 
     void display(){
-        if(k==0 && m==0){
+        if(k==0){
             cout<<"0";
             return;
         }
         if(op==1){
             cout<<'-';
-            for(int i=0;i<m;i++){
+            for(int i=0;i<k;i++){
                 cout<<digit[i].getDigit();
             }
         }
