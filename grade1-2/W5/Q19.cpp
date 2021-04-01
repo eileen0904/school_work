@@ -66,7 +66,7 @@ public:
             }
         }
     }
-    void JudgeBig(IntNumber *s){
+    void JudgeBig(IntNumber *s){ //from to high to low
         for(int j=0;j<this->k;j--){
             if(this->digit[j].getDigit() == s->digit[j].getDigit()){
                 continue;
@@ -111,7 +111,7 @@ public:
         IntNumber *result = new IntNumber(*this);
         int len1 = n1->k;
         int len2 = n2->k;
-        int len = 0;
+        int len = 0;    //length of result
         int a=0, b=0, carry=0, sum=0, i;
         if(len2 > len1){
             return data2->add(this);
@@ -182,7 +182,7 @@ public:
                     len++;
                 }
                 for(i=len-1;i>0;i--){
-                    if(result->digit[i].getDigit()==0){
+                    if(result->digit[i].getDigit()==0){ //delete 0 from high
                         result->k = n1->k-1;
                     }
                     else{
