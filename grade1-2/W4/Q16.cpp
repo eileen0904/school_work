@@ -66,22 +66,25 @@ public:
         p2.setX(b.getX());
         p2.setY(b.getY());
     }
+
     float getLength(){
         return p1.getDistance(p2);
     }
+
     double a=0, b=0, c=0;
-    void getline(Segment &m){
+    void getline(Segment &m){ //&=>copy constractor
         m.a = m.p1.getY()-m.p2.getY();
         m.b = m.p2.getX()-m.p1.getX();
         m.c = m.p1.getX()*m.p2.getY()-m.p2.getX()*m.p1.getY();
     }
-    Point *getIntersect(Segment s){
+
+    Point *getIntersect(Segment s){ //s=>L2, t=>L1
         Segment t(p1,p2);
         getline(t);
         getline(s);
         Point *p = new Point();
         double D = t.a*s.b-s.a*t.b;
-        if(D==0){
+        if(D==0){ //parallel
             if (t.p1.getX()==s.p1.getX() && t.p1.getY()==s.p1.getY()){
                 p -> setX(t.p1.getX());
                 p -> setY(t.p1.getY());
@@ -114,8 +117,11 @@ public:
             p -> setY(insY);
             return p;
         }
-        else{return NULL;}
+        else{
+            return NULL;
+        }
     }
+
 bool ins(float n1, float n2, float pt){
         if(pt>=n1 && pt<=n2){return true;}
         if(pt<=n1 && pt>=n2){return true;}
