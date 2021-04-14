@@ -6,7 +6,7 @@ int getNumerator(); // return the numerator of the fraction number.
 int getDenominator(); // return the denominator of the fraction number.
 void setNumerator(int ); // use the parameter to set numerator of the fraction.
 void setDenominator(int ); // use the parameter to set denominator of the fraction.
-void display(); // display the irreducible fractions the format "(numerator/denominator)". 
+void display(); // display the irreducible fractions the format "(numerator/denominator)".
 e.g. (5/9). you should not display denominator if denominator is 1.
 Please override operator +, -, *, / and = make the following statement work.
 Fraction a, b, c, d, e, f;
@@ -102,13 +102,15 @@ ostream &operator << (ostream &c, Fraction &f){
         return c;
 }
 
-/*int main(){
+int main(){
     int a,b,c,d;
     cin>>a>>b>>c>>d;
     Fraction f1(a,b);
     Fraction f2(c,d);
     Fraction result(0,0);
-    cout<<"f1:"<<f1<<endl;
-    cout<<"f1/:"<<(!f1);
+    result = f1+f2;
+    result.display();
+    //cout<<"f1+f2:"<<result<<endl;
+    //cout<<"f1/:"<<(!f1);
     return 0;
-}*/
+}

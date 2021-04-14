@@ -67,7 +67,7 @@ public:
         }
     }
     void JudgeBig(IntNumber *s){ //from to high to low
-        for(int j=0;j<this->k;j--){
+        for(int j=0;j<this->k;j++){
             if(this->digit[j].getDigit() == s->digit[j].getDigit()){
                 continue;
             }
@@ -118,7 +118,7 @@ public:
         }
         if((n1->op==0 && n2->op==0) || (n1->op==1 && n2->op==1)){
             if(n1->op==1 && n2->op==1){
-                result->op==1;
+                result->op = 1;
             }
             while(len1>0){
                 a = n1->digit[len1-1].getDigit();
@@ -154,10 +154,10 @@ public:
             n1->JudgeBig(n2);
             if(n1->n1_big){
                 if(n1->op==1){
-                    result->op==1;
+                    result->op = 1;
                 }
                 else{
-                    result->op==0;
+                    result->op = 0;
                 }
                 while(len1>0){
                     a = n1->digit[len1-1].getDigit();
