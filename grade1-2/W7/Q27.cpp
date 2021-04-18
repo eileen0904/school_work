@@ -2,7 +2,7 @@
 
 
 #include<iostream>
-#include<string.h>
+#include<cstring>
 using namespace std;
 
 int main(){
@@ -17,7 +17,6 @@ int main(){
         len = strlen(s);
         memset(map,0,sizeof(map));
         for(i=0;i<len;i++){
-        cout<<s[1]<<endl;
             if(s[i]=='E'){
                 map[y][x+1] = 1;
                 x++;
