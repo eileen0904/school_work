@@ -1,2 +1,2 @@
 # school_work
-programming class in garde1
+programming class in university
