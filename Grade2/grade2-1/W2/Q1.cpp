@@ -3,10 +3,12 @@ using namespace std;
 
 void allocArray(int ***p, int m, int n){
     int **arr = new int*[m];
+    int *row = new int[m*n];
     for(int i = 0; i < m; i++) {
-        arr[i] = new int [n];
+        arr[i] = row + i*n;
+        new int[n];
     }
-    *p = arr; //?
+    *p = arr;
 }
 
 int main(){
@@ -19,7 +21,7 @@ int main(){
     }
     for(j = 0;j < 5;j ++){
         for(k = 0;k < 10;k ++) {
-            printf("%p ", &(array[j][k]));
+            printf("%p\n", &(array[j][k]));
         }
     }
     return 0;
