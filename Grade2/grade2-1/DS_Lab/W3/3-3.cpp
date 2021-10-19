@@ -22,6 +22,7 @@ public:
     int push(int d)
     {
         Node *node = new Node();
+        if(node==NULL){return -1;}
         node->data = d;
         node->next = top; //Point next at current top.
         top = node; //Assign top as the new node recently created.

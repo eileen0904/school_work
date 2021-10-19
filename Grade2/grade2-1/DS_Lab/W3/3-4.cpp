@@ -23,6 +23,7 @@ public:
 	int enqueue(int data)
 	{
         Node *node = new Node();
+		if(node==NULL){return -1;}
         node->data = data;
         node->next = NULL;
         if(top==NULL){
