@@ -51,7 +51,7 @@ public:
 	*/
 	Grid *removeElement()
 	{
-		if(top==NULL){return NULL;}
+		if(top==0){return NULL;}
 		top--;
 		return data[top+1];
 	}
@@ -148,9 +148,9 @@ public:
                 int random = rand()%100;
                 if(random<=20 && cur->getState()==0){
                     cur->setState(1);
-                    cur = cur->getDir(RIGHT);
                     count++;
                 }
+				cur = cur->getDir(RIGHT);
                 if(count>=(s*s*0.2)){break;}
             }
             temp = temp->getDir(DOWN);
@@ -173,7 +173,6 @@ public:
 	List *getPath()
 	{
 		move(maze);
-        if(list->getTop()==0){return NULL;}
         return list;
 	}
 	void move(Grid *m){
