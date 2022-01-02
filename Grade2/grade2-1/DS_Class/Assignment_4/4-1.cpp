@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <iomanip>
 
 using namespace std;
 
@@ -28,7 +27,7 @@ private:
 
 class WeightComp{
 public:
-     bool operator()(const Edge &e1, Edge &e2){
+     bool operator()(const Edge &e1, const Edge &e2){
         return e1.getWeight() < e2.getWeight();
      }
 };
