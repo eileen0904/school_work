@@ -1,0 +1,2603 @@
+State 19 conflicts: 3 shift/reduce
+State 45 conflicts: 3 shift/reduce
+State 93 conflicts: 9 shift/reduce
+State 115 conflicts: 1 shift/reduce
+State 116 conflicts: 1 shift/reduce
+State 117 conflicts: 1 shift/reduce
+State 118 conflicts: 1 shift/reduce
+State 119 conflicts: 1 shift/reduce
+State 120 conflicts: 1 shift/reduce
+State 121 conflicts: 1 shift/reduce
+State 122 conflicts: 1 shift/reduce
+State 124 conflicts: 9 shift/reduce
+
+
+Grammar
+
+    0 $accept: prog $end
+
+    1 prog: mainc cdcls
+    2     | %empty
+
+    3 mainc: CLASS ID LBP PUB STATIC VOID MAIN LP STR LSP RSP ID RP LBP stmts RBP RBP
+
+    4 cdcls: cdcl cdcls
+    5      | %empty
+
+    6 cdcl: CLASS ID LBP vdcls mdcls RBP
+
+    7 vdcls: vdcl vdcls
+    8      | %empty
+
+    9 vdcl: type ID SEMI
+
+   10 mdcls: mdcl mdcls
+   11      | %empty
+
+   12 mdcl: PUB type ID LP formals RP LBP vdcls stmts RETURN exp SEMI RBP
+
+   13 formals: type ID frest
+   14        | %empty
+
+   15 frest: COMMA type ID frest
+   16      | %empty
+
+   17 type: INT LSP RSP
+   18     | BOOLEAN
+   19     | INT
+   20     | ID
+
+   21 stmt: LBP stmts RBP
+   22     | IF LP exp RP stmt ELSE stmt
+   23     | WHILE LP exp RP stmt
+   24     | PRINT LP exp RP SEMI
+   25     | ID ASSIGN exp SEMI
+   26     | ID LSP exp RSP ASSIGN exp SEMI
+   27     | vdcl
+
+   28 stmts: stmt stmts
+   29      | %empty
+
+   30 exp: exp ADD exp
+   31    | exp MINUS exp
+   32    | exp TIMES exp
+   33    | exp AND exp
+   34    | exp OR exp
+   35    | exp LT exp
+   36    | exp LE exp
+   37    | exp EQ exp
+   38    | ID LSP exp RSP
+   39    | ID LP expls RP
+   40    | LP exp RP
+   41    | exp DOT exp
+   42    | LIT
+   43    | TRUE
+   44    | FALSE
+   45    | ID
+   46    | THIS
+   47    | NEW INT LSP exp RSP
+   48    | NEW ID LP RP
+   49    | NOT exp
+
+   50 expls: exp exprest
+   51      | %empty
+
+   52 exprest: COMMA exp exprest
+   53        | %empty
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+CLASS (258) 3 6
+PUB (259) 3 12
+STATIC (260) 3
+AND (261) 33
+OR (262) 34
+LT (263) 35
+LE (264) 36
+EQ (265) 37
+ADD (266) 30
+MINUS (267) 31
+TIMES (268) 32
+LBP (269) 3 6 12 21
+RBP (270) 3 6 12 21
+LSP (271) 3 17 26 38 47
+RSP (272) 3 17 26 38 47
+LP (273) 3 12 22 23 24 39 40 48
+RP (274) 3 12 22 23 24 39 40 48
+INT (275) 17 19 47
+BOOLEAN (276) 18
+IF (277) 22
+ELSE (278) 22
+WHILE (279) 23
+PRINT (280) 24
+ASSIGN (281) 25 26
+VOID (282) 3
+MAIN (283) 3
+STR (284) 3
+RETURN (285) 12
+SEMI (286) 9 12 24 25 26
+COMMA (287) 15 52
+THIS (288) 46
+NEW (289) 47 48
+DOT (290) 41
+ID (291) 3 6 9 12 13 15 20 25 26 38 39 45 48
+LIT (292) 42
+TRUE (293) 43
+FALSE (294) 44
+NOT (295) 49
+
+
+Nonterminals, with rules where they appear
+
+$accept (41)
+    on left: 0
+prog (42)
+    on left: 1 2, on right: 0
+mainc (43)
+    on left: 3, on right: 1
+cdcls (44)
+    on left: 4 5, on right: 1 4
+cdcl (45)
+    on left: 6, on right: 4
+vdcls (46)
+    on left: 7 8, on right: 6 7 12
+vdcl (47)
+    on left: 9, on right: 7 27
+mdcls (48)
+    on left: 10 11, on right: 6 10
+mdcl (49)
+    on left: 12, on right: 10
+formals (50)
+    on left: 13 14, on right: 12
+frest (51)
+    on left: 15 16, on right: 13 15
+type (52)
+    on left: 17 18 19 20, on right: 9 12 13 15
+stmt (53)
+    on left: 21 22 23 24 25 26 27, on right: 22 23 28
+stmts (54)
+    on left: 28 29, on right: 3 12 21 28
+exp (55)
+    on left: 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+    48 49, on right: 12 22 23 24 25 26 30 31 32 33 34 35 36 37 38 40
+    41 47 49 50 52
+expls (56)
+    on left: 50 51, on right: 39
+exprest (57)
+    on left: 52 53, on right: 50 52
+
+
+State 0
+
+    0 $accept: . prog $end
+    1 prog: . mainc cdcls
+    2     | . %empty  [$end]
+    3 mainc: . CLASS ID LBP PUB STATIC VOID MAIN LP STR LSP RSP ID RP LBP stmts RBP RBP
+
+    CLASS  shift, and go to state 1
+
+    $default  reduce using rule 2 (prog)
+
+    prog   go to state 2
+    mainc  go to state 3
+
+
+State 1
+
+    3 mainc: CLASS . ID LBP PUB STATIC VOID MAIN LP STR LSP RSP ID RP LBP stmts RBP RBP
+
+    ID  shift, and go to state 4
+
+
+State 2
+
+    0 $accept: prog . $end
+
+    $end  shift, and go to state 5
+
+
+State 3
+
+    1 prog: mainc . cdcls
+    4 cdcls: . cdcl cdcls
+    5      | . %empty  [$end]
+    6 cdcl: . CLASS ID LBP vdcls mdcls RBP
+
+    CLASS  shift, and go to state 6
+
+    $default  reduce using rule 5 (cdcls)
+
+    cdcls  go to state 7
+    cdcl   go to state 8
+
+
+State 4
+
+    3 mainc: CLASS ID . LBP PUB STATIC VOID MAIN LP STR LSP RSP ID RP LBP stmts RBP RBP
+
+    LBP  shift, and go to state 9
+
+
+State 5
+
+    0 $accept: prog $end .
+
+    $default  accept
+
+
+State 6
+
+    6 cdcl: CLASS . ID LBP vdcls mdcls RBP
+
+    ID  shift, and go to state 10
+
+
+State 7
+
+    1 prog: mainc cdcls .
+
+    $default  reduce using rule 1 (prog)
+
+
+State 8
+
+    4 cdcls: . cdcl cdcls
+    4      | cdcl . cdcls
+    5      | . %empty  [$end]
+    6 cdcl: . CLASS ID LBP vdcls mdcls RBP
+
+    CLASS  shift, and go to state 6
+
+    $default  reduce using rule 5 (cdcls)
+
+    cdcls  go to state 11
+    cdcl   go to state 8
+
+
+State 9
+
+    3 mainc: CLASS ID LBP . PUB STATIC VOID MAIN LP STR LSP RSP ID RP LBP stmts RBP RBP
+
+    PUB  shift, and go to state 12
+
+
+State 10
+
+    6 cdcl: CLASS ID . LBP vdcls mdcls RBP
+
+    LBP  shift, and go to state 13
+
+
+State 11
+
+    4 cdcls: cdcl cdcls .
+
+    $default  reduce using rule 4 (cdcls)
+
+
+State 12
+
+    3 mainc: CLASS ID LBP PUB . STATIC VOID MAIN LP STR LSP RSP ID RP LBP stmts RBP RBP
+
+    STATIC  shift, and go to state 14
+
+
+State 13
+
+    6 cdcl: CLASS ID LBP . vdcls mdcls RBP
+    7 vdcls: . vdcl vdcls
+    8      | . %empty  [PUB, RBP]
+    9 vdcl: . type ID SEMI
+   17 type: . INT LSP RSP
+   18     | . BOOLEAN
+   19     | . INT
+   20     | . ID
+
+    INT      shift, and go to state 15
+    BOOLEAN  shift, and go to state 16
+    ID       shift, and go to state 17
+
+    $default  reduce using rule 8 (vdcls)
+
+    vdcls  go to state 18
+    vdcl   go to state 19
+    type   go to state 20
+
+
+State 14
+
+    3 mainc: CLASS ID LBP PUB STATIC . VOID MAIN LP STR LSP RSP ID RP LBP stmts RBP RBP
+
+    VOID  shift, and go to state 21
+
+
+State 15
+
+   17 type: INT . LSP RSP
+   19     | INT .  [ID]
+
+    LSP  shift, and go to state 22
+
+    $default  reduce using rule 19 (type)
+
+
+State 16
+
+   18 type: BOOLEAN .
+
+    $default  reduce using rule 18 (type)
+
+
+State 17
+
+   20 type: ID .
+
+    $default  reduce using rule 20 (type)
+
+
+State 18
+
+    6 cdcl: CLASS ID LBP vdcls . mdcls RBP
+   10 mdcls: . mdcl mdcls
+   11      | . %empty  [RBP]
+   12 mdcl: . PUB type ID LP formals RP LBP vdcls stmts RETURN exp SEMI RBP
+
+    PUB  shift, and go to state 23
+
+    $default  reduce using rule 11 (mdcls)
+
+    mdcls  go to state 24
+    mdcl   go to state 25
+
+
+State 19
+
+    7 vdcls: . vdcl vdcls
+    7      | vdcl . vdcls
+    8      | . %empty  [PUB, LBP, RBP, INT, BOOLEAN, IF, WHILE, PRINT, RETURN, ID]
+    9 vdcl: . type ID SEMI
+   17 type: . INT LSP RSP
+   18     | . BOOLEAN
+   19     | . INT
+   20     | . ID
+
+    INT      shift, and go to state 15
+    BOOLEAN  shift, and go to state 16
+    ID       shift, and go to state 17
+
+    INT       [reduce using rule 8 (vdcls)]
+    BOOLEAN   [reduce using rule 8 (vdcls)]
+    ID        [reduce using rule 8 (vdcls)]
+    $default  reduce using rule 8 (vdcls)
+
+    vdcls  go to state 26
+    vdcl   go to state 19
+    type   go to state 20
+
+
+State 20
+
+    9 vdcl: type . ID SEMI
+
+    ID  shift, and go to state 27
+
+
+State 21
+
+    3 mainc: CLASS ID LBP PUB STATIC VOID . MAIN LP STR LSP RSP ID RP LBP stmts RBP RBP
+
+    MAIN  shift, and go to state 28
+
+
+State 22
+
+   17 type: INT LSP . RSP
+
+    RSP  shift, and go to state 29
+
+
+State 23
+
+   12 mdcl: PUB . type ID LP formals RP LBP vdcls stmts RETURN exp SEMI RBP
+   17 type: . INT LSP RSP
+   18     | . BOOLEAN
+   19     | . INT
+   20     | . ID
+
+    INT      shift, and go to state 15
+    BOOLEAN  shift, and go to state 16
+    ID       shift, and go to state 17
+
+    type  go to state 30
+
+
+State 24
+
+    6 cdcl: CLASS ID LBP vdcls mdcls . RBP
+
+    RBP  shift, and go to state 31
+
+
+State 25
+
+   10 mdcls: . mdcl mdcls
+   10      | mdcl . mdcls
+   11      | . %empty  [RBP]
+   12 mdcl: . PUB type ID LP formals RP LBP vdcls stmts RETURN exp SEMI RBP
+
+    PUB  shift, and go to state 23
+
+    $default  reduce using rule 11 (mdcls)
+
+    mdcls  go to state 32
+    mdcl   go to state 25
+
+
+State 26
+
+    7 vdcls: vdcl vdcls .
+
+    $default  reduce using rule 7 (vdcls)
+
+
+State 27
+
+    9 vdcl: type ID . SEMI
+
+    SEMI  shift, and go to state 33
+
+
+State 28
+
+    3 mainc: CLASS ID LBP PUB STATIC VOID MAIN . LP STR LSP RSP ID RP LBP stmts RBP RBP
+
+    LP  shift, and go to state 34
+
+
+State 29
+
+   17 type: INT LSP RSP .
+
+    $default  reduce using rule 17 (type)
+
+
+State 30
+
+   12 mdcl: PUB type . ID LP formals RP LBP vdcls stmts RETURN exp SEMI RBP
+
+    ID  shift, and go to state 35
+
+
+State 31
+
+    6 cdcl: CLASS ID LBP vdcls mdcls RBP .
+
+    $default  reduce using rule 6 (cdcl)
+
+
+State 32
+
+   10 mdcls: mdcl mdcls .
+
+    $default  reduce using rule 10 (mdcls)
+
+
+State 33
+
+    9 vdcl: type ID SEMI .
+
+    $default  reduce using rule 9 (vdcl)
+
+
+State 34
+
+    3 mainc: CLASS ID LBP PUB STATIC VOID MAIN LP . STR LSP RSP ID RP LBP stmts RBP RBP
+
+    STR  shift, and go to state 36
+
+
+State 35
+
+   12 mdcl: PUB type ID . LP formals RP LBP vdcls stmts RETURN exp SEMI RBP
+
+    LP  shift, and go to state 37
+
+
+State 36
+
+    3 mainc: CLASS ID LBP PUB STATIC VOID MAIN LP STR . LSP RSP ID RP LBP stmts RBP RBP
+
+    LSP  shift, and go to state 38
+
+
+State 37
+
+   12 mdcl: PUB type ID LP . formals RP LBP vdcls stmts RETURN exp SEMI RBP
+   13 formals: . type ID frest
+   14        | . %empty  [RP]
+   17 type: . INT LSP RSP
+   18     | . BOOLEAN
+   19     | . INT
+   20     | . ID
+
+    INT      shift, and go to state 15
+    BOOLEAN  shift, and go to state 16
+    ID       shift, and go to state 17
+
+    $default  reduce using rule 14 (formals)
+
+    formals  go to state 39
+    type     go to state 40
+
+
+State 38
+
+    3 mainc: CLASS ID LBP PUB STATIC VOID MAIN LP STR LSP . RSP ID RP LBP stmts RBP RBP
+
+    RSP  shift, and go to state 41
+
+
+State 39
+
+   12 mdcl: PUB type ID LP formals . RP LBP vdcls stmts RETURN exp SEMI RBP
+
+    RP  shift, and go to state 42
+
+
+State 40
+
+   13 formals: type . ID frest
+
+    ID  shift, and go to state 43
+
+
+State 41
+
+    3 mainc: CLASS ID LBP PUB STATIC VOID MAIN LP STR LSP RSP . ID RP LBP stmts RBP RBP
+
+    ID  shift, and go to state 44
+
+
+State 42
+
+   12 mdcl: PUB type ID LP formals RP . LBP vdcls stmts RETURN exp SEMI RBP
+
+    LBP  shift, and go to state 45
+
+
+State 43
+
+   13 formals: type ID . frest
+   15 frest: . COMMA type ID frest
+   16      | . %empty  [RP]
+
+    COMMA  shift, and go to state 46
+
+    $default  reduce using rule 16 (frest)
+
+    frest  go to state 47
+
+
+State 44
+
+    3 mainc: CLASS ID LBP PUB STATIC VOID MAIN LP STR LSP RSP ID . RP LBP stmts RBP RBP
+
+    RP  shift, and go to state 48
+
+
+State 45
+
+    7 vdcls: . vdcl vdcls
+    8      | . %empty  [LBP, INT, BOOLEAN, IF, WHILE, PRINT, RETURN, ID]
+    9 vdcl: . type ID SEMI
+   12 mdcl: PUB type ID LP formals RP LBP . vdcls stmts RETURN exp SEMI RBP
+   17 type: . INT LSP RSP
+   18     | . BOOLEAN
+   19     | . INT
+   20     | . ID
+
+    INT      shift, and go to state 15
+    BOOLEAN  shift, and go to state 16
+    ID       shift, and go to state 17
+
+    INT       [reduce using rule 8 (vdcls)]
+    BOOLEAN   [reduce using rule 8 (vdcls)]
+    ID        [reduce using rule 8 (vdcls)]
+    $default  reduce using rule 8 (vdcls)
+
+    vdcls  go to state 49
+    vdcl   go to state 19
+    type   go to state 20
+
+
+State 46
+
+   15 frest: COMMA . type ID frest
+   17 type: . INT LSP RSP
+   18     | . BOOLEAN
+   19     | . INT
+   20     | . ID
+
+    INT      shift, and go to state 15
+    BOOLEAN  shift, and go to state 16
+    ID       shift, and go to state 17
+
+    type  go to state 50
+
+
+State 47
+
+   13 formals: type ID frest .
+
+    $default  reduce using rule 13 (formals)
+
+
+State 48
+
+    3 mainc: CLASS ID LBP PUB STATIC VOID MAIN LP STR LSP RSP ID RP . LBP stmts RBP RBP
+
+    LBP  shift, and go to state 51
+
+
+State 49
+
+    9 vdcl: . type ID SEMI
+   12 mdcl: PUB type ID LP formals RP LBP vdcls . stmts RETURN exp SEMI RBP
+   17 type: . INT LSP RSP
+   18     | . BOOLEAN
+   19     | . INT
+   20     | . ID
+   21 stmt: . LBP stmts RBP
+   22     | . IF LP exp RP stmt ELSE stmt
+   23     | . WHILE LP exp RP stmt
+   24     | . PRINT LP exp RP SEMI
+   25     | . ID ASSIGN exp SEMI
+   26     | . ID LSP exp RSP ASSIGN exp SEMI
+   27     | . vdcl
+   28 stmts: . stmt stmts
+   29      | . %empty  [RETURN]
+
+    LBP      shift, and go to state 52
+    INT      shift, and go to state 15
+    BOOLEAN  shift, and go to state 16
+    IF       shift, and go to state 53
+    WHILE    shift, and go to state 54
+    PRINT    shift, and go to state 55
+    ID       shift, and go to state 56
+
+    $default  reduce using rule 29 (stmts)
+
+    vdcl   go to state 57
+    type   go to state 20
+    stmt   go to state 58
+    stmts  go to state 59
+
+
+State 50
+
+   15 frest: COMMA type . ID frest
+
+    ID  shift, and go to state 60
+
+
+State 51
+
+    3 mainc: CLASS ID LBP PUB STATIC VOID MAIN LP STR LSP RSP ID RP LBP . stmts RBP RBP
+    9 vdcl: . type ID SEMI
+   17 type: . INT LSP RSP
+   18     | . BOOLEAN
+   19     | . INT
+   20     | . ID
+   21 stmt: . LBP stmts RBP
+   22     | . IF LP exp RP stmt ELSE stmt
+   23     | . WHILE LP exp RP stmt
+   24     | . PRINT LP exp RP SEMI
+   25     | . ID ASSIGN exp SEMI
+   26     | . ID LSP exp RSP ASSIGN exp SEMI
+   27     | . vdcl
+   28 stmts: . stmt stmts
+   29      | . %empty  [RBP]
+
+    LBP      shift, and go to state 52
+    INT      shift, and go to state 15
+    BOOLEAN  shift, and go to state 16
+    IF       shift, and go to state 53
+    WHILE    shift, and go to state 54
+    PRINT    shift, and go to state 55
+    ID       shift, and go to state 56
+
+    $default  reduce using rule 29 (stmts)
+
+    vdcl   go to state 57
+    type   go to state 20
+    stmt   go to state 58
+    stmts  go to state 61
+
+
+State 52
+
+    9 vdcl: . type ID SEMI
+   17 type: . INT LSP RSP
+   18     | . BOOLEAN
+   19     | . INT
+   20     | . ID
+   21 stmt: . LBP stmts RBP
+   21     | LBP . stmts RBP
+   22     | . IF LP exp RP stmt ELSE stmt
+   23     | . WHILE LP exp RP stmt
+   24     | . PRINT LP exp RP SEMI
+   25     | . ID ASSIGN exp SEMI
+   26     | . ID LSP exp RSP ASSIGN exp SEMI
+   27     | . vdcl
+   28 stmts: . stmt stmts
+   29      | . %empty  [RBP]
+
+    LBP      shift, and go to state 52
+    INT      shift, and go to state 15
+    BOOLEAN  shift, and go to state 16
+    IF       shift, and go to state 53
+    WHILE    shift, and go to state 54
+    PRINT    shift, and go to state 55
+    ID       shift, and go to state 56
+
+    $default  reduce using rule 29 (stmts)
+
+    vdcl   go to state 57
+    type   go to state 20
+    stmt   go to state 58
+    stmts  go to state 62
+
+
+State 53
+
+   22 stmt: IF . LP exp RP stmt ELSE stmt
+
+    LP  shift, and go to state 63
+
+
+State 54
+
+   23 stmt: WHILE . LP exp RP stmt
+
+    LP  shift, and go to state 64
+
+
+State 55
+
+   24 stmt: PRINT . LP exp RP SEMI
+
+    LP  shift, and go to state 65
+
+
+State 56
+
+   20 type: ID .  [ID]
+   25 stmt: ID . ASSIGN exp SEMI
+   26     | ID . LSP exp RSP ASSIGN exp SEMI
+
+    LSP     shift, and go to state 66
+    ASSIGN  shift, and go to state 67
+
+    $default  reduce using rule 20 (type)
+
+
+State 57
+
+   27 stmt: vdcl .
+
+    $default  reduce using rule 27 (stmt)
+
+
+State 58
+
+    9 vdcl: . type ID SEMI
+   17 type: . INT LSP RSP
+   18     | . BOOLEAN
+   19     | . INT
+   20     | . ID
+   21 stmt: . LBP stmts RBP
+   22     | . IF LP exp RP stmt ELSE stmt
+   23     | . WHILE LP exp RP stmt
+   24     | . PRINT LP exp RP SEMI
+   25     | . ID ASSIGN exp SEMI
+   26     | . ID LSP exp RSP ASSIGN exp SEMI
+   27     | . vdcl
+   28 stmts: . stmt stmts
+   28      | stmt . stmts
+   29      | . %empty  [RBP, RETURN]
+
+    LBP      shift, and go to state 52
+    INT      shift, and go to state 15
+    BOOLEAN  shift, and go to state 16
+    IF       shift, and go to state 53
+    WHILE    shift, and go to state 54
+    PRINT    shift, and go to state 55
+    ID       shift, and go to state 56
+
+    $default  reduce using rule 29 (stmts)
+
+    vdcl   go to state 57
+    type   go to state 20
+    stmt   go to state 58
+    stmts  go to state 68
+
+
+State 59
+
+   12 mdcl: PUB type ID LP formals RP LBP vdcls stmts . RETURN exp SEMI RBP
+
+    RETURN  shift, and go to state 69
+
+
+State 60
+
+   15 frest: . COMMA type ID frest
+   15      | COMMA type ID . frest
+   16      | . %empty  [RP]
+
+    COMMA  shift, and go to state 46
+
+    $default  reduce using rule 16 (frest)
+
+    frest  go to state 70
+
+
+State 61
+
+    3 mainc: CLASS ID LBP PUB STATIC VOID MAIN LP STR LSP RSP ID RP LBP stmts . RBP RBP
+
+    RBP  shift, and go to state 71
+
+
+State 62
+
+   21 stmt: LBP stmts . RBP
+
+    RBP  shift, and go to state 72
+
+
+State 63
+
+   22 stmt: IF LP . exp RP stmt ELSE stmt
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 81
+
+
+State 64
+
+   23 stmt: WHILE LP . exp RP stmt
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 82
+
+
+State 65
+
+   24 stmt: PRINT LP . exp RP SEMI
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 83
+
+
+State 66
+
+   26 stmt: ID LSP . exp RSP ASSIGN exp SEMI
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 84
+
+
+State 67
+
+   25 stmt: ID ASSIGN . exp SEMI
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 85
+
+
+State 68
+
+   28 stmts: stmt stmts .
+
+    $default  reduce using rule 28 (stmts)
+
+
+State 69
+
+   12 mdcl: PUB type ID LP formals RP LBP vdcls stmts RETURN . exp SEMI RBP
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 86
+
+
+State 70
+
+   15 frest: COMMA type ID frest .
+
+    $default  reduce using rule 15 (frest)
+
+
+State 71
+
+    3 mainc: CLASS ID LBP PUB STATIC VOID MAIN LP STR LSP RSP ID RP LBP stmts RBP . RBP
+
+    RBP  shift, and go to state 87
+
+
+State 72
+
+   21 stmt: LBP stmts RBP .
+
+    $default  reduce using rule 21 (stmt)
+
+
+State 73
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   40    | LP . exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 88
+
+
+State 74
+
+   46 exp: THIS .
+
+    $default  reduce using rule 46 (exp)
+
+
+State 75
+
+   47 exp: NEW . INT LSP exp RSP
+   48    | NEW . ID LP RP
+
+    INT  shift, and go to state 89
+    ID   shift, and go to state 90
+
+
+State 76
+
+   38 exp: ID . LSP exp RSP
+   39    | ID . LP expls RP
+   45    | ID .  [AND, OR, LT, LE, EQ, ADD, MINUS, TIMES, RSP, RP, SEMI, COMMA, DOT]
+
+    LSP  shift, and go to state 91
+    LP   shift, and go to state 92
+
+    $default  reduce using rule 45 (exp)
+
+
+State 77
+
+   42 exp: LIT .
+
+    $default  reduce using rule 42 (exp)
+
+
+State 78
+
+   43 exp: TRUE .
+
+    $default  reduce using rule 43 (exp)
+
+
+State 79
+
+   44 exp: FALSE .
+
+    $default  reduce using rule 44 (exp)
+
+
+State 80
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+   49    | NOT . exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 93
+
+
+State 81
+
+   22 stmt: IF LP exp . RP stmt ELSE stmt
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    RP     shift, and go to state 102
+    DOT    shift, and go to state 103
+
+
+State 82
+
+   23 stmt: WHILE LP exp . RP stmt
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    RP     shift, and go to state 104
+    DOT    shift, and go to state 103
+
+
+State 83
+
+   24 stmt: PRINT LP exp . RP SEMI
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    RP     shift, and go to state 105
+    DOT    shift, and go to state 103
+
+
+State 84
+
+   26 stmt: ID LSP exp . RSP ASSIGN exp SEMI
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    RSP    shift, and go to state 106
+    DOT    shift, and go to state 103
+
+
+State 85
+
+   25 stmt: ID ASSIGN exp . SEMI
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    SEMI   shift, and go to state 107
+    DOT    shift, and go to state 103
+
+
+State 86
+
+   12 mdcl: PUB type ID LP formals RP LBP vdcls stmts RETURN exp . SEMI RBP
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    SEMI   shift, and go to state 108
+    DOT    shift, and go to state 103
+
+
+State 87
+
+    3 mainc: CLASS ID LBP PUB STATIC VOID MAIN LP STR LSP RSP ID RP LBP stmts RBP RBP .
+
+    $default  reduce using rule 3 (mainc)
+
+
+State 88
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   40    | LP exp . RP
+   41    | exp . DOT exp
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    RP     shift, and go to state 109
+    DOT    shift, and go to state 103
+
+
+State 89
+
+   47 exp: NEW INT . LSP exp RSP
+
+    LSP  shift, and go to state 110
+
+
+State 90
+
+   48 exp: NEW ID . LP RP
+
+    LP  shift, and go to state 111
+
+
+State 91
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   38    | ID LSP . exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 112
+
+
+State 92
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   39    | ID LP . expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+   50 expls: . exp exprest
+   51      | . %empty  [RP]
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    $default  reduce using rule 51 (expls)
+
+    exp    go to state 113
+    expls  go to state 114
+
+
+State 93
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+   49    | NOT exp .  [AND, OR, LT, LE, EQ, ADD, MINUS, TIMES, RSP, RP, SEMI, COMMA, DOT]
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    DOT    shift, and go to state 103
+
+    AND       [reduce using rule 49 (exp)]
+    OR        [reduce using rule 49 (exp)]
+    LT        [reduce using rule 49 (exp)]
+    LE        [reduce using rule 49 (exp)]
+    EQ        [reduce using rule 49 (exp)]
+    ADD       [reduce using rule 49 (exp)]
+    MINUS     [reduce using rule 49 (exp)]
+    TIMES     [reduce using rule 49 (exp)]
+    DOT       [reduce using rule 49 (exp)]
+    $default  reduce using rule 49 (exp)
+
+
+State 94
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   33    | exp AND . exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 115
+
+
+State 95
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   34    | exp OR . exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 116
+
+
+State 96
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   35    | exp LT . exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 117
+
+
+State 97
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   36    | exp LE . exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 118
+
+
+State 98
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   37    | exp EQ . exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 119
+
+
+State 99
+
+   30 exp: . exp ADD exp
+   30    | exp ADD . exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 120
+
+
+State 100
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   31    | exp MINUS . exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 121
+
+
+State 101
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   32    | exp TIMES . exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 122
+
+
+State 102
+
+    9 vdcl: . type ID SEMI
+   17 type: . INT LSP RSP
+   18     | . BOOLEAN
+   19     | . INT
+   20     | . ID
+   21 stmt: . LBP stmts RBP
+   22     | . IF LP exp RP stmt ELSE stmt
+   22     | IF LP exp RP . stmt ELSE stmt
+   23     | . WHILE LP exp RP stmt
+   24     | . PRINT LP exp RP SEMI
+   25     | . ID ASSIGN exp SEMI
+   26     | . ID LSP exp RSP ASSIGN exp SEMI
+   27     | . vdcl
+
+    LBP      shift, and go to state 52
+    INT      shift, and go to state 15
+    BOOLEAN  shift, and go to state 16
+    IF       shift, and go to state 53
+    WHILE    shift, and go to state 54
+    PRINT    shift, and go to state 55
+    ID       shift, and go to state 56
+
+    vdcl  go to state 57
+    type  go to state 20
+    stmt  go to state 123
+
+
+State 103
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   41    | exp DOT . exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 124
+
+
+State 104
+
+    9 vdcl: . type ID SEMI
+   17 type: . INT LSP RSP
+   18     | . BOOLEAN
+   19     | . INT
+   20     | . ID
+   21 stmt: . LBP stmts RBP
+   22     | . IF LP exp RP stmt ELSE stmt
+   23     | . WHILE LP exp RP stmt
+   23     | WHILE LP exp RP . stmt
+   24     | . PRINT LP exp RP SEMI
+   25     | . ID ASSIGN exp SEMI
+   26     | . ID LSP exp RSP ASSIGN exp SEMI
+   27     | . vdcl
+
+    LBP      shift, and go to state 52
+    INT      shift, and go to state 15
+    BOOLEAN  shift, and go to state 16
+    IF       shift, and go to state 53
+    WHILE    shift, and go to state 54
+    PRINT    shift, and go to state 55
+    ID       shift, and go to state 56
+
+    vdcl  go to state 57
+    type  go to state 20
+    stmt  go to state 125
+
+
+State 105
+
+   24 stmt: PRINT LP exp RP . SEMI
+
+    SEMI  shift, and go to state 126
+
+
+State 106
+
+   26 stmt: ID LSP exp RSP . ASSIGN exp SEMI
+
+    ASSIGN  shift, and go to state 127
+
+
+State 107
+
+   25 stmt: ID ASSIGN exp SEMI .
+
+    $default  reduce using rule 25 (stmt)
+
+
+State 108
+
+   12 mdcl: PUB type ID LP formals RP LBP vdcls stmts RETURN exp SEMI . RBP
+
+    RBP  shift, and go to state 128
+
+
+State 109
+
+   40 exp: LP exp RP .
+
+    $default  reduce using rule 40 (exp)
+
+
+State 110
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   47    | NEW INT LSP . exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 129
+
+
+State 111
+
+   48 exp: NEW ID LP . RP
+
+    RP  shift, and go to state 130
+
+
+State 112
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   38    | ID LSP exp . RSP
+   41    | exp . DOT exp
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    RSP    shift, and go to state 131
+    DOT    shift, and go to state 103
+
+
+State 113
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+   50 expls: exp . exprest
+   52 exprest: . COMMA exp exprest
+   53        | . %empty  [RP]
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    COMMA  shift, and go to state 132
+    DOT    shift, and go to state 103
+
+    $default  reduce using rule 53 (exprest)
+
+    exprest  go to state 133
+
+
+State 114
+
+   39 exp: ID LP expls . RP
+
+    RP  shift, and go to state 134
+
+
+State 115
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   33    | exp AND exp .  [AND, OR, RSP, RP, SEMI, COMMA, DOT]
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    DOT    shift, and go to state 103
+
+    DOT       [reduce using rule 33 (exp)]
+    $default  reduce using rule 33 (exp)
+
+    Conflict between rule 33 and token AND resolved as reduce (%left AND).
+    Conflict between rule 33 and token OR resolved as reduce (%left OR).
+    Conflict between rule 33 and token LT resolved as shift (AND < LT).
+    Conflict between rule 33 and token LE resolved as shift (AND < LE).
+    Conflict between rule 33 and token EQ resolved as shift (AND < EQ).
+    Conflict between rule 33 and token ADD resolved as shift (AND < ADD).
+    Conflict between rule 33 and token MINUS resolved as shift (AND < MINUS).
+    Conflict between rule 33 and token TIMES resolved as shift (AND < TIMES).
+
+
+State 116
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   34    | exp OR exp .  [AND, OR, RSP, RP, SEMI, COMMA, DOT]
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    DOT    shift, and go to state 103
+
+    DOT       [reduce using rule 34 (exp)]
+    $default  reduce using rule 34 (exp)
+
+    Conflict between rule 34 and token AND resolved as reduce (%left AND).
+    Conflict between rule 34 and token OR resolved as reduce (%left OR).
+    Conflict between rule 34 and token LT resolved as shift (OR < LT).
+    Conflict between rule 34 and token LE resolved as shift (OR < LE).
+    Conflict between rule 34 and token EQ resolved as shift (OR < EQ).
+    Conflict between rule 34 and token ADD resolved as shift (OR < ADD).
+    Conflict between rule 34 and token MINUS resolved as shift (OR < MINUS).
+    Conflict between rule 34 and token TIMES resolved as shift (OR < TIMES).
+
+
+State 117
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   35    | exp LT exp .  [AND, OR, LT, LE, EQ, RSP, RP, SEMI, COMMA, DOT]
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    DOT    shift, and go to state 103
+
+    DOT       [reduce using rule 35 (exp)]
+    $default  reduce using rule 35 (exp)
+
+    Conflict between rule 35 and token AND resolved as reduce (AND < LT).
+    Conflict between rule 35 and token OR resolved as reduce (OR < LT).
+    Conflict between rule 35 and token LT resolved as reduce (%left LT).
+    Conflict between rule 35 and token LE resolved as reduce (%left LE).
+    Conflict between rule 35 and token EQ resolved as reduce (%left EQ).
+    Conflict between rule 35 and token ADD resolved as shift (LT < ADD).
+    Conflict between rule 35 and token MINUS resolved as shift (LT < MINUS).
+    Conflict between rule 35 and token TIMES resolved as shift (LT < TIMES).
+
+
+State 118
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   36    | exp LE exp .  [AND, OR, LT, LE, EQ, RSP, RP, SEMI, COMMA, DOT]
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    DOT    shift, and go to state 103
+
+    DOT       [reduce using rule 36 (exp)]
+    $default  reduce using rule 36 (exp)
+
+    Conflict between rule 36 and token AND resolved as reduce (AND < LE).
+    Conflict between rule 36 and token OR resolved as reduce (OR < LE).
+    Conflict between rule 36 and token LT resolved as reduce (%left LT).
+    Conflict between rule 36 and token LE resolved as reduce (%left LE).
+    Conflict between rule 36 and token EQ resolved as reduce (%left EQ).
+    Conflict between rule 36 and token ADD resolved as shift (LE < ADD).
+    Conflict between rule 36 and token MINUS resolved as shift (LE < MINUS).
+    Conflict between rule 36 and token TIMES resolved as shift (LE < TIMES).
+
+
+State 119
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   37    | exp EQ exp .  [AND, OR, LT, LE, EQ, RSP, RP, SEMI, COMMA, DOT]
+   41    | exp . DOT exp
+
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    DOT    shift, and go to state 103
+
+    DOT       [reduce using rule 37 (exp)]
+    $default  reduce using rule 37 (exp)
+
+    Conflict between rule 37 and token AND resolved as reduce (AND < EQ).
+    Conflict between rule 37 and token OR resolved as reduce (OR < EQ).
+    Conflict between rule 37 and token LT resolved as reduce (%left LT).
+    Conflict between rule 37 and token LE resolved as reduce (%left LE).
+    Conflict between rule 37 and token EQ resolved as reduce (%left EQ).
+    Conflict between rule 37 and token ADD resolved as shift (EQ < ADD).
+    Conflict between rule 37 and token MINUS resolved as shift (EQ < MINUS).
+    Conflict between rule 37 and token TIMES resolved as shift (EQ < TIMES).
+
+
+State 120
+
+   30 exp: exp . ADD exp
+   30    | exp ADD exp .  [AND, OR, LT, LE, EQ, ADD, MINUS, RSP, RP, SEMI, COMMA, DOT]
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    TIMES  shift, and go to state 101
+    DOT    shift, and go to state 103
+
+    DOT       [reduce using rule 30 (exp)]
+    $default  reduce using rule 30 (exp)
+
+    Conflict between rule 30 and token AND resolved as reduce (AND < ADD).
+    Conflict between rule 30 and token OR resolved as reduce (OR < ADD).
+    Conflict between rule 30 and token LT resolved as reduce (LT < ADD).
+    Conflict between rule 30 and token LE resolved as reduce (LE < ADD).
+    Conflict between rule 30 and token EQ resolved as reduce (EQ < ADD).
+    Conflict between rule 30 and token ADD resolved as reduce (%left ADD).
+    Conflict between rule 30 and token MINUS resolved as reduce (%left MINUS).
+    Conflict between rule 30 and token TIMES resolved as shift (ADD < TIMES).
+
+
+State 121
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   31    | exp MINUS exp .  [AND, OR, LT, LE, EQ, ADD, MINUS, RSP, RP, SEMI, COMMA, DOT]
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    TIMES  shift, and go to state 101
+    DOT    shift, and go to state 103
+
+    DOT       [reduce using rule 31 (exp)]
+    $default  reduce using rule 31 (exp)
+
+    Conflict between rule 31 and token AND resolved as reduce (AND < MINUS).
+    Conflict between rule 31 and token OR resolved as reduce (OR < MINUS).
+    Conflict between rule 31 and token LT resolved as reduce (LT < MINUS).
+    Conflict between rule 31 and token LE resolved as reduce (LE < MINUS).
+    Conflict between rule 31 and token EQ resolved as reduce (EQ < MINUS).
+    Conflict between rule 31 and token ADD resolved as reduce (%left ADD).
+    Conflict between rule 31 and token MINUS resolved as reduce (%left MINUS).
+    Conflict between rule 31 and token TIMES resolved as shift (MINUS < TIMES).
+
+
+State 122
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   32    | exp TIMES exp .  [AND, OR, LT, LE, EQ, ADD, MINUS, TIMES, RSP, RP, SEMI, COMMA, DOT]
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    DOT  shift, and go to state 103
+
+    DOT       [reduce using rule 32 (exp)]
+    $default  reduce using rule 32 (exp)
+
+    Conflict between rule 32 and token AND resolved as reduce (AND < TIMES).
+    Conflict between rule 32 and token OR resolved as reduce (OR < TIMES).
+    Conflict between rule 32 and token LT resolved as reduce (LT < TIMES).
+    Conflict between rule 32 and token LE resolved as reduce (LE < TIMES).
+    Conflict between rule 32 and token EQ resolved as reduce (EQ < TIMES).
+    Conflict between rule 32 and token ADD resolved as reduce (ADD < TIMES).
+    Conflict between rule 32 and token MINUS resolved as reduce (MINUS < TIMES).
+    Conflict between rule 32 and token TIMES resolved as reduce (%left TIMES).
+
+
+State 123
+
+   22 stmt: IF LP exp RP stmt . ELSE stmt
+
+    ELSE  shift, and go to state 135
+
+
+State 124
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+   41    | exp DOT exp .  [AND, OR, LT, LE, EQ, ADD, MINUS, TIMES, RSP, RP, SEMI, COMMA, DOT]
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    DOT    shift, and go to state 103
+
+    AND       [reduce using rule 41 (exp)]
+    OR        [reduce using rule 41 (exp)]
+    LT        [reduce using rule 41 (exp)]
+    LE        [reduce using rule 41 (exp)]
+    EQ        [reduce using rule 41 (exp)]
+    ADD       [reduce using rule 41 (exp)]
+    MINUS     [reduce using rule 41 (exp)]
+    TIMES     [reduce using rule 41 (exp)]
+    DOT       [reduce using rule 41 (exp)]
+    $default  reduce using rule 41 (exp)
+
+
+State 125
+
+   23 stmt: WHILE LP exp RP stmt .
+
+    $default  reduce using rule 23 (stmt)
+
+
+State 126
+
+   24 stmt: PRINT LP exp RP SEMI .
+
+    $default  reduce using rule 24 (stmt)
+
+
+State 127
+
+   26 stmt: ID LSP exp RSP ASSIGN . exp SEMI
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 136
+
+
+State 128
+
+   12 mdcl: PUB type ID LP formals RP LBP vdcls stmts RETURN exp SEMI RBP .
+
+    $default  reduce using rule 12 (mdcl)
+
+
+State 129
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+   47    | NEW INT LSP exp . RSP
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    RSP    shift, and go to state 137
+    DOT    shift, and go to state 103
+
+
+State 130
+
+   48 exp: NEW ID LP RP .
+
+    $default  reduce using rule 48 (exp)
+
+
+State 131
+
+   38 exp: ID LSP exp RSP .
+
+    $default  reduce using rule 38 (exp)
+
+
+State 132
+
+   30 exp: . exp ADD exp
+   31    | . exp MINUS exp
+   32    | . exp TIMES exp
+   33    | . exp AND exp
+   34    | . exp OR exp
+   35    | . exp LT exp
+   36    | . exp LE exp
+   37    | . exp EQ exp
+   38    | . ID LSP exp RSP
+   39    | . ID LP expls RP
+   40    | . LP exp RP
+   41    | . exp DOT exp
+   42    | . LIT
+   43    | . TRUE
+   44    | . FALSE
+   45    | . ID
+   46    | . THIS
+   47    | . NEW INT LSP exp RSP
+   48    | . NEW ID LP RP
+   49    | . NOT exp
+   52 exprest: COMMA . exp exprest
+
+    LP     shift, and go to state 73
+    THIS   shift, and go to state 74
+    NEW    shift, and go to state 75
+    ID     shift, and go to state 76
+    LIT    shift, and go to state 77
+    TRUE   shift, and go to state 78
+    FALSE  shift, and go to state 79
+    NOT    shift, and go to state 80
+
+    exp  go to state 138
+
+
+State 133
+
+   50 expls: exp exprest .
+
+    $default  reduce using rule 50 (expls)
+
+
+State 134
+
+   39 exp: ID LP expls RP .
+
+    $default  reduce using rule 39 (exp)
+
+
+State 135
+
+    9 vdcl: . type ID SEMI
+   17 type: . INT LSP RSP
+   18     | . BOOLEAN
+   19     | . INT
+   20     | . ID
+   21 stmt: . LBP stmts RBP
+   22     | . IF LP exp RP stmt ELSE stmt
+   22     | IF LP exp RP stmt ELSE . stmt
+   23     | . WHILE LP exp RP stmt
+   24     | . PRINT LP exp RP SEMI
+   25     | . ID ASSIGN exp SEMI
+   26     | . ID LSP exp RSP ASSIGN exp SEMI
+   27     | . vdcl
+
+    LBP      shift, and go to state 52
+    INT      shift, and go to state 15
+    BOOLEAN  shift, and go to state 16
+    IF       shift, and go to state 53
+    WHILE    shift, and go to state 54
+    PRINT    shift, and go to state 55
+    ID       shift, and go to state 56
+
+    vdcl  go to state 57
+    type  go to state 20
+    stmt  go to state 139
+
+
+State 136
+
+   26 stmt: ID LSP exp RSP ASSIGN exp . SEMI
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    SEMI   shift, and go to state 140
+    DOT    shift, and go to state 103
+
+
+State 137
+
+   47 exp: NEW INT LSP exp RSP .
+
+    $default  reduce using rule 47 (exp)
+
+
+State 138
+
+   30 exp: exp . ADD exp
+   31    | exp . MINUS exp
+   32    | exp . TIMES exp
+   33    | exp . AND exp
+   34    | exp . OR exp
+   35    | exp . LT exp
+   36    | exp . LE exp
+   37    | exp . EQ exp
+   41    | exp . DOT exp
+   52 exprest: . COMMA exp exprest
+   52        | COMMA exp . exprest
+   53        | . %empty  [RP]
+
+    AND    shift, and go to state 94
+    OR     shift, and go to state 95
+    LT     shift, and go to state 96
+    LE     shift, and go to state 97
+    EQ     shift, and go to state 98
+    ADD    shift, and go to state 99
+    MINUS  shift, and go to state 100
+    TIMES  shift, and go to state 101
+    COMMA  shift, and go to state 132
+    DOT    shift, and go to state 103
+
+    $default  reduce using rule 53 (exprest)
+
+    exprest  go to state 141
+
+
+State 139
+
+   22 stmt: IF LP exp RP stmt ELSE stmt .
+
+    $default  reduce using rule 22 (stmt)
+
+
+State 140
+
+   26 stmt: ID LSP exp RSP ASSIGN exp SEMI .
+
+    $default  reduce using rule 26 (stmt)
+
+
+State 141
+
+   52 exprest: COMMA exp exprest .
+
+    $default  reduce using rule 52 (exprest)
