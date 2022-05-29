@@ -1,0 +1,110 @@
+module FreqDiv(input iClk, input EN, output reg oClk);
+integer count;
+parameter RATE = 50000000;
+initial
+	count = 0;
+	always@(posedge iClk)
+	begin
+		if(EN)
+		begin
+			if(count < RATE/2)
+				oClk = 1;
+			else
+				oClk = 0;
+			count = (count+1) % RATE;
+		end
+		
+	end
+endmodule
+
+module JK_FF(input J, input K, input clk, output reg Q);
+	always @(posedge clk)
+	begin
+		if(J==0 && K==1) begin
+			Q = 0;
+		end
+		if(J==1 && K==0) begin
+			Q = 1;
+		end
+		if(J==1 && K==1) begin
+			Q = ~Q;
+		end
+	end
+endmodule
+
+module counter(input clk, output [2:0]Q);
+	JK_FF a(1, 1, clk, Q[0]);
+	JK_FF b(1, 1, ~Q[0], Q[1]);
+	JK_FF c(1, 1, ~Q[1], Q[2]);
+endmodule
+
+module MUX(input [7:0]sw, input [2:0]sel, output reg data);
+	always@(sel)
+	begin
+		case(sel)
+			3'b000: data=sw[0];
+			3'b001: data=sw[1];
+			3'b010: data=sw[2];
+			3'b011: data=sw[3];
+			3'b100: data=sw[4];
+			3'b101: data=sw[5];
+			3'b110: data=sw[6];
+			3'b111: data=sw[7];
+		endcase
+	end
+endmodule
+
+module MUX_DEMUX(input clk, input EN, input [7:0]sw, output data, output [2:0]sel);
+wire oclk;
+FreqDiv a(clk, EN, oclk);
+counter b(oclk, sel);
+MUX(sw, sel, data);
+endmodule
+
+
+module ex10(sw, data, outleds, seg);
+	input [2:0]sw;
+	input data;
+	output[7:0]outleds;
+	output [6:0]seg;
+	demux(sw, data, outleds);
+endmodule
+
+module demux(inValue, x, outleds);
+	input [2:0] inValue;
+	input x;
+	output reg[7:0]outleds;
+	always@(inValue)
+		begin
+			case(inValue)
+				3'b111: outleds={x,7'b0000000};
+				3'b110: outleds={1'b0,x,6'b000000};
+				3'b101: outleds={2'b00,x,5'b00000};
+				3'b100: outleds={3'b000,x,4'b0000};
+				3'b011: outleds={4'b0000,x,3'b000};
+				3'b010: outleds={5'b00000,x,2'b00};
+				3'b001: outleds={6'b000000,x,1'b0};
+				3'b000: outleds={7'b0000000,x};
+				default: outleds={8'b00000000};
+			endcase
+		end
+endmodule
+
+module seven(inValue, outleds);
+	input [2:0] inValue;
+	output reg[6:0]outleds;
+	always@(inValue)
+		begin
+			case(inValue)
+			3'b000: outleds=7'b1000000;
+			3'b001: outleds=7'b1111001;
+			3'b010: outleds=7'b0100100;
+			3'b011: outleds=7'b0110000;
+			3'b100: outleds=7'b0011001;
+			3'b101: outleds=7'b0010010;
+			3'b110: outleds=7'b0000010;
+			3'b111: outleds=7'b1111000;
+			default: outleds=7'b1000000;
+			endcase
+		end
+endmodule

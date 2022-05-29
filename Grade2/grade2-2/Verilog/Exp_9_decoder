@@ -1,0 +1,56 @@
+module dec24(in, en, outLeds);
+	input [1:0]in;
+	input en;
+	output reg [3:0]outLeds;
+	
+	always @(in)
+		begin
+			if(!en)
+				begin
+				case(in)
+					2'b00: outLeds = 4'b1110; // 0
+					2'b01: outLeds = 4'b1101; // 1
+					2'b10: outLeds = 4'b1011; // 2
+					2'b11: outLeds = 4'b0111; // 3
+				endcase
+				end
+			else
+				outLeds = 4'b1111;
+		end
+endmodule
+
+module dec38(in, en, outLeds);
+	input [2:0]in;
+	input en;
+	output reg [7:0]outLeds;
+	
+	always @(in)
+		begin
+			if(!en)
+				begin
+				case(in)
+					3'b000: outLeds = 8'b11111110; // 0
+					3'b001: outLeds = 8'b11111101; // 1
+					3'b010: outLeds = 8'b11111011; // 2
+					3'b011: outLeds = 8'b11110111; // 3
+					3'b100: outLeds = 8'b11101111; // 4
+					3'b101: outLeds = 8'b11011111; // 5
+					3'b110: outLeds = 8'b10111111; // 6
+					3'b111: outLeds = 8'b01111111; // 7
+				endcase
+				end
+			else
+				outLeds = 8'b11111111;
+		end
+endmodule
+
+module exp9(in, en, leds);
+	input [3:0]in;
+	input en;
+	output [15:0]leds;
+	wire [3:0]temp24;
+	dec24 ({1'b1, in[3]}, en, temp24[3:0]);
+	
+	dec38(in[2:0], temp24[2], leds[7:0]);
+	dec38(in[2:0], temp24[3], leds[15:8]);
+endmodule
