@@ -87,19 +87,6 @@ Command *insert(Command* COM, char** str, int count) {
     return newcmd;
 }
 
-void PrintList() { 
-    Command* cur = headlist;
-    if (cur == NULL) {
-        fprintf(stderr, "List is empty!\n");
-        return;
-    } else {
-        while (cur != NULL) {
-            printf("pipelist:%s\n", cur->path);
-            cur = cur->pipelist_n;
-        }
-    }
-}
-
 void FreeList() { 
     Command *cur, *tmp;
     cur = head;

@@ -9,7 +9,6 @@ char *read_command();
 Command* insert(Command* COM, char** str, int count);
 void FreeList();
 Command* parse(char* buf);
-void PrintList();
 void handle_sigusr1(int signum);
 void run(Command* CMD);
 Command* DeleteCommand(Command* node);
