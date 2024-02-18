@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ZenOldMincho-Regular.ttf</string>
+		<string>ZenOldMincho-SemiBold.ttf</string>
+		<string>ZenOldMincho-Bold.ttf</string>
+		<string>ZenOldMincho-Black.ttf</string>
+		<string>ZenOldMincho-Medium.ttf</string>
+		<string>ZenMaruGothic-Black.ttf</string>
+		<string>ZenMaruGothic-Bold.ttf</string>
+		<string>ZenMaruGothic-Medium.ttf</string>
+		<string>ZenMaruGothic-Regular.ttf</string>
+		<string>ZenMaruGothic-Light.ttf</string>
+	</array>
+</dict>
+</plist>
